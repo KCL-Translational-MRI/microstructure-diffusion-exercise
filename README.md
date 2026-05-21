@@ -38,6 +38,13 @@ The `data/` folder contains the following data, taken from an *ex vivo* mouse li
 - `dwi_data.gdur` A plain text file listing the gradient durations δ of the volumes in `dwi_data_sphmean.nii` (note that in this dataset, all volumes were acquired with the same δ)
 - `dwi_data.gsep` A plain text file listing the diffusion times (gradient separations, Δ) of the volumes in `dwi_data_sphmean.nii`
 
+### 3. Running Histo-μSim
+Follow the [**Histo-μSim** tutorial instructions](https://github.com/radiomicsgroup/dMRIMC/tree/2ff4abe7b9cd4a8f6e4c9ea9b1f7f990ae57143d#example-lets-try-histo-%CE%BCsim-on-some-data) two generate two sets of microstructure parameter estimates
 
+1. Estimating 5 microstructural parameters: `fin`, `vCS_cyl`, `D0in`, `D0ex`, and `kappa`
+2. Estimating 3 microstructural parameters:  `fin`, `vCS_cyl`, and `D0ex`, with the others assigned to fixed values: `D0in=1.35` and `kappa=20`
+
+### 4. Results 
+Use MATLAB, `matplotlib`, or a NIFTI image viewing tool to visualize the parameter maps. Save images of the intracellular volume fraction (`fin`) and volume-weighted cell size (`vCS_cyl`) for both sets of parameter estimates.
 
 
