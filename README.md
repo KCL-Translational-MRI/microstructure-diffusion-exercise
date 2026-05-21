@@ -55,7 +55,7 @@ Use MATLAB, `matplotlib`, or a NIFTI image viewing tool to visualize the diffusi
 
 Display the *b*=0 images and one of the *b*=1500 images (*HINT: look at* `dwi_data.bval` *to see the b-values of each of the volumes in the data.*). Ensure that the same colour-axis limits are applied to both images, so that the difference in signal between *b*=0 and *b*=1500 can be seen. An example image is shown below.
 
-ADD IMAGE HERE
+![Example diffusion-weighted images](/example_images/ex_dwi_images.png "Example diffusion-weighted images")
 
 ### 2. Running Histo-μSim
 Follow the [**Histo-μSim** tutorial instructions](https://github.com/radiomicsgroup/dMRIMC/tree/2ff4abe7b9cd4a8f6e4c9ea9b1f7f990ae57143d#example-lets-try-histo-%CE%BCsim-on-some-data) two generate parameter maps for 5 microstructural parameters:  `fin`, `vCS_cyl`, `D0in`, `D0ex`, and `kappa`.
