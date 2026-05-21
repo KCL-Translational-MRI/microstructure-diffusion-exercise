@@ -4,20 +4,20 @@ This is an exercise in estimating microstructural tissue parameters from *ex viv
 ## Background
 This will be filled in later with some theory about diffusion MRI and microstructure.
 
-## The Task
+## Setting Up
 Your task is to use the data provided in `data/` and **Histo-μSim** to generate maps of microstructural tissue parameters.
 
 You should follow the [tutorial instructions](https://github.com/radiomicsgroup/dMRIMC/tree/2ff4abe7b9cd4a8f6e4c9ea9b1f7f990ae57143d#example-lets-try-histo-%CE%BCsim-on-some-data) in the **Histo-μSim** repository, replacing the example data with that from the `data/` folder.
 
-### 1. Installation
-You will need to clone the [**Histo-μSim** repository](https://github.com/radiomicsgroup/dMRIMC), which is also included as a submodule in this repository, and install the dependencies. An [environment.yml](https://github.com/KCL-Translational-MRI/microstructure-diffusion-exercise/blob/main/environment.yml) is provided with the required dependencies.
+### Installation
 
-A conda enviornment called `histomusim` can be created with:
+Clone this repository into a location of your choice:
 
 ```
-conda create --file environment.yml
-conda activate histomusim
+git clone https://github.com/KCL-Translational-MRI/microstructure-diffusion-exercise.git 
 ```
+
+You will also need the [**Histo-μSim** repository](https://github.com/radiomicsgroup/dMRIMC), which is included as a submodule in this repository, and you will need to install the dependencies. An [environment.yml](https://github.com/KCL-Translational-MRI/microstructure-diffusion-exercise/blob/main/environment.yml) is provided with the required dependencies.
 
 The **Histo-μSim** repository can be cloned with:
 
@@ -26,9 +26,16 @@ git submodule init
 git submodule update
 ```
 
+A conda enviornment called `histomusim` can be created with:
+
+```
+conda create --file environment.yml
+conda activate histomusim
+```
+
 You should now be able to run the Python and Shell scripts in `dMRIMC/`.
 
-### 2. Provided Data
+### Provided Data
 The `data/` folder contains the following data, taken from an *ex vivo* mouse liver imaging dataset:
 
 - `dwi_data_sphmean.nii` The diffusion MRI data. This file contains a single slice (a 2D image) with 13 volumes (images), which consist of a *b*=0 image, and 12 diffusion-weighted images, acquired with different *b*-values and diffusion times Δ. The data have already been averaged across diffusion-encoding directions, and denoised using MP-PCA.
@@ -38,13 +45,38 @@ The `data/` folder contains the following data, taken from an *ex vivo* mouse li
 - `dwi_data.gdur` A plain text file listing the gradient durations δ of the volumes in `dwi_data_sphmean.nii` (note that in this dataset, all volumes were acquired with the same δ)
 - `dwi_data.gsep` A plain text file listing the diffusion times (gradient separations, Δ) of the volumes in `dwi_data_sphmean.nii`
 
-### 3. Running Histo-μSim
-Follow the [**Histo-μSim** tutorial instructions](https://github.com/radiomicsgroup/dMRIMC/tree/2ff4abe7b9cd4a8f6e4c9ea9b1f7f990ae57143d#example-lets-try-histo-%CE%BCsim-on-some-data) two generate two sets of microstructure parameter estimates
+## The Task
 
-1. Estimating 5 microstructural parameters: `fin`, `vCS_cyl`, `D0in`, `D0ex`, and `kappa`
-2. Estimating 3 microstructural parameters:  `fin`, `vCS_cyl`, and `D0ex`, with the others assigned to fixed values: `D0in=1.35` and `kappa=20`
+Complete the following tasks. Save the resulting images in a Word document (or equivalent) along with your responses to the questions.
 
-### 4. Results 
-Use MATLAB, `matplotlib`, or a NIFTI image viewing tool to visualize the parameter maps. Save images of the intracellular volume fraction (`fin`) and volume-weighted cell size (`vCS_cyl`) for both sets of parameter estimates.
+### 1. Visualizing the Data
 
+Use MATLAB, `matplotlib`, or a NIFTI image viewing tool to visualize the diffusion-weighted images contained in `dwi_data_sphmean.nii`. 
 
+Display the *b*=0 images and one of the *b*=1500 images (*HINT: look at* `dwi_data.bval` *to see the b-values of each of the volumes in the data.*). Ensure that the same colour-axis limits are applied to both images, so that the difference in signal between *b*=0 and *b*=1500 can be seen. An example image is shown below.
+
+ADD IMAGE HERE
+
+### 2. Running Histo-μSim
+Follow the [**Histo-μSim** tutorial instructions](https://github.com/radiomicsgroup/dMRIMC/tree/2ff4abe7b9cd4a8f6e4c9ea9b1f7f990ae57143d#example-lets-try-histo-%CE%BCsim-on-some-data) two generate parameter maps for 5 microstructural parameters:  `fin`, `vCS_cyl`, `D0in`, `D0ex`, and `kappa`.
+
+Display images of the  intracellular volume fraction (`fin`) and volume-weighted cell size (`vCS_cyl`).
+
+### 3. Running Histo-μSim with fixed parameters
+Use **Histo-μSim** again on the same data, but this time, generate parameter maps for only 3 microstructural parameters:  `fin`, `vCS_cyl`, and `D0ex`. The other parameters should be assigned to fixed values:  `D0in=1.35` and `kappa=20` (*HINT: Make sure that you save these results under a different protocol name*)
+
+As before, display images of the  intracellular volume fraction (`fin`) and volume-weighted cell size (`vCS_cyl`).
+
+> Do you notice any differences in the intracellular volume fraction or cell size maps between the two inference methods?
+
+### 4. Regularization
+The dictionary matching procedure (`mri2micro_dictml.py`) uses spatial regularization of the parameter maps, by default, to constrain values and reduce noise in the results.
+
+Run the *fixed parameter* analysis again:
+1. With no regularization in `mri2micro_dictml.py`
+2. With stronger regularization than the default (e.g. λ=0.02)
+
+> Describe the effect that regularization has on the parameter maps. You may want to look particularly at `D0ex`.
+
+### 5. Generative AI Use
+If you used generative AI tools in completing any of these tasks, please describe which tools you used, and how you used them. 
