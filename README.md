@@ -2,7 +2,21 @@
 This is an exercise in estimating microstructural tissue parameters from *ex vivo* diffusion data using the **Histo-μSim** framework.
 
 ## Background
-This will be filled in later with some theory about diffusion MRI and microstructure.
+Diffusion-weighting in MR images is typically obtained by inserting a pair of diffusion-sensitizing gradients into a spin echo sequence, as shown below.
+
+![Example diffusion sequence](/example_images/ex_dwi_sequence.png "Example diffusion sequence") 
+
+The amount of diffusion-weighting, commonly referred to as the *b*-value, is dependent on the sequence parameters, and given by this equation:
+
+$$ b=(\Delta-\delta/3)(\gamma\delta G)^2 $$
+
+where
+- $\delta$ is the gradient duration
+- $\Delta$ is the gradient separation, or diffusion time
+- $G$ is the amplitude of the diffusion-sensitizing gradients
+- $\gamma$ is the proton gyromagnetic ratio 
+
+ADD MORE EXPLANATION 
 
 ## Setting Up
 Your task is to use the data provided in `data/` and **Histo-μSim** to generate maps of microstructural tissue parameters.
