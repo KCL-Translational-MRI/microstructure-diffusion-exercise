@@ -1,0 +1,3 @@
+[submodule "dMRIMC"]
+	path = dMRIMC
+	url = https://github.com/radiomicsgroup/dMRIMC
